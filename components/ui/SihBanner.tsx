@@ -16,7 +16,7 @@ export default function SihBanner() {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.15 }}
-      className="group relative w-full rounded-2xl p-[2px] bg-gradient-to-r from-[#e07c24]/40 via-pbgreen to-[#e07c24]/40 shadow-[0_0_12px_rgba(224,124,36,0.15)] transition-all duration-300"
+      className="group relative w-full rounded-2xl p-[2px] bg-gradient-to-br from-[rgba(0,255,0,0.25)] via-[rgba(0,204,68,0.25)] to-[rgba(0,255,0,0.25)] hover:from-[#00ff00] hover:via-[#00cc44] hover:to-[#00ff00] hover:shadow-[0_0_16px_rgba(0,255,0,0.15)] transition-all duration-300"
     >
       {/* ─── Content Container ─── */}
       <div className="relative w-full h-full rounded-[14px] bg-black overflow-hidden">
