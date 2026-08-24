@@ -42,7 +42,7 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center w-full">
           <div className="col-span-1 lg:col-span-7 flex flex-col items-center lg:items-start">
             <h1
-              className={`text-4xl sm:text-5xl md:text-6xl xl:text-7xl text-center lg:text-left tracking-[-0.05em] text-white select-none ${lexendTera.className}`}
+              className={`text-4xl sm:text-5xl md:text-6xl xl:text-7xl text-center lg:text-left tracking-[-22%] text-white select-none ${lexendTera.className}`}
             >
               {headingParts.map((part, idx) =>
                 part.br ? (
