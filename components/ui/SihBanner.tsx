@@ -65,16 +65,16 @@ export default function SihBanner() {
           </div>
 
           {/* ══ Data Blocks ══ */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 w-full min-w-0">
             {/* Top Row: 2 blocks */}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2 sm:gap-3 w-full">
               {/* Event Date */}
-              <div className="flex items-center gap-3 rounded-2xl border border-pbgreen/20 bg-black p-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-pbgreen/10">
+              <div className="flex flex-col items-center gap-2 rounded-2xl border border-pbgreen/20 bg-black p-3 sm:p-4 sm:flex-row sm:items-center sm:gap-3">
+                <div className="flex h-10 w-10 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-pbgreen/10">
                   <Calendar className="h-5 w-5 text-pbgreen" />
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-500">
+                <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
+                  <span className="text-xs uppercase tracking-wider text-gray-500">
                     Event Date
                   </span>
                   <span className="text-sm sm:text-base font-bold text-pbgreen">
@@ -84,12 +84,12 @@ export default function SihBanner() {
               </div>
 
               {/* Venue */}
-              <div className="flex items-center gap-3 rounded-2xl border border-pbgreen/20 bg-black p-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-pbgreen/10">
+              <div className="flex flex-col items-center gap-2 rounded-2xl border border-pbgreen/20 bg-black p-3 sm:p-4 sm:flex-row sm:items-center sm:gap-3">
+                <div className="flex h-10 w-10 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-pbgreen/10">
                   <Globe className="h-5 w-5 text-pbgreen" />
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-500">
+                <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
+                  <span className="text-xs uppercase tracking-wider text-gray-500">
                     Venue
                   </span>
                   <span className="text-sm sm:text-base font-bold text-pbgreen">
@@ -100,12 +100,12 @@ export default function SihBanner() {
             </div>
 
             {/* Bottom Row: 1 block (full width) */}
-            <div className="flex items-center gap-3 rounded-2xl border border-pbgreen/20 bg-black p-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-pbgreen/10">
+            <div className="flex flex-col items-center gap-2 rounded-2xl border border-pbgreen/20 bg-black p-3 sm:p-4 sm:flex-row sm:items-center sm:gap-3 w-full">
+              <div className="flex h-10 w-10 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-pbgreen/10">
                 <FileText className="h-5 w-5 text-pbgreen" />
               </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-500">
+              <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
+                <span className="text-xs uppercase tracking-wider text-gray-500">
                   Problem Statements Drop
                 </span>
                 <span className="text-sm sm:text-base font-bold text-pbgreen">
