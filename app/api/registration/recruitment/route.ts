@@ -6,15 +6,17 @@ import { createTransport } from "nodemailer";
 import jwt from "jsonwebtoken";
 import { randomInt } from "crypto";
 
-const OTP_VERIFICATION_SECRET = process.env.JWT_SECRET;
-if (!OTP_VERIFICATION_SECRET) {
-  throw new Error("JWT_SECRET environment variable is required");
-}
-// After the throw above, OTP_VERIFICATION_SECRET is guaranteed to be a string.
-const _otpSecret: string = OTP_VERIFICATION_SECRET;
 const OTP_TOKEN_EXPIRY = "10m";
 const MAX_OTP_ATTEMPTS = 5;
 const OTP_LOCKOUT_MINUTES = 15;
+
+function getJwtSecret(): string {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error("JWT_SECRET environment variable is required");
+  }
+  return secret;
+}
 
 const transporter = createTransport({
   host: process.env.MAIL_SMTP,
@@ -426,7 +428,7 @@ async function sendOTP(request: Request) {
 
     const verificationToken = jwt.sign(
       { email: normalizedEmail, purpose: "otp_verified" },
-      _otpSecret,
+      getJwtSecret(),
       { expiresIn: OTP_TOKEN_EXPIRY }
     );
 
@@ -465,7 +467,7 @@ async function addRegistration(request: Request) {
     // Verify the JWT token
     let tokenPayload: { email: string; purpose: string };
     try {
-      tokenPayload = jwt.verify(verificationToken, _otpSecret) as { email: string; purpose: string };
+      tokenPayload = jwt.verify(verificationToken, getJwtSecret()) as { email: string; purpose: string };
     } catch {
       return NextResponse.json(
         { error: "Invalid or expired verification token. Please verify your OTP again." },
