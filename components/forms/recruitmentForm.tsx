@@ -220,14 +220,23 @@ const RecruitmentForm: React.FC = () => {
           }
         );
 
-        if (!response.ok) {
-          const result = await response.json();
+        const result = await response.json();
+
+        if (response.status === 409) {
+          // Duplicate found
           const fields = result.duplicates || [];
           const labels: string[] = [];
           if (fields.includes("email")) labels.push("Email");
           if (fields.includes("phone")) labels.push("Phone number");
           if (fields.includes("college_id")) labels.push("College ID");
           toast.error(`${labels.join(", ")} already registered`);
+          setIsSubmitting(false);
+          return;
+        }
+
+        if (!response.ok) {
+          // Server error (e.g. 500) — not a duplicate issue
+          toast.error(result.error || "Failed to verify details. Please try again.");
           setIsSubmitting(false);
           return;
         }

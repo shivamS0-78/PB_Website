@@ -301,6 +301,16 @@ async function checkDuplicates(request: Request) {
   try {
     await connectDB();
 
+    // Wait for connection with timeout (same as addRegistration)
+    const connectionTimeout = 10000;
+    const startTime = Date.now();
+    while (mongoose.connection.readyState !== 1) {
+      if (Date.now() - startTime > connectionTimeout) {
+        throw new Error("Database connection timeout");
+      }
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+
     const { email, whatsapp_number, college_id } = await request.json();
     const normalizedEmail = email?.toLowerCase().trim();
     const normalizedCollegeId = college_id?.toUpperCase().trim();
