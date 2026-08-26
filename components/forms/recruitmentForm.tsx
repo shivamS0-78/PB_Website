@@ -36,6 +36,7 @@ const RecruitmentForm: React.FC = () => {
   const [isSendingOTP, setIsSendingOTP] = useState(false);
   const [resendTimer, setResendTimer] = useState(0);
   const resendIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const verificationTokenRef = useRef<string | null>(null);
 
   const {
     register,
@@ -149,6 +150,8 @@ const RecruitmentForm: React.FC = () => {
         return;
       }
       toast.success("OTP verified!");
+      // Store the verification token for the registration request
+      verificationTokenRef.current = result.verificationToken || null;
       // Proceed to submit registration
       const success = await submitRegistration(formDataForSubmission);
       if (success) {
@@ -182,7 +185,10 @@ const RecruitmentForm: React.FC = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify({
+            ...data,
+            verificationToken: verificationTokenRef.current,
+          }),
         }
       );
 
@@ -567,9 +573,10 @@ const RecruitmentForm: React.FC = () => {
                       value: 10,
                       message: "Please write at least 10 characters",
                     },
-                    maxLength: {
-                      value: 1500,
-                      message: "Maximum 1500 characters allowed",
+                    validate: (value) => {
+                      const wordCount = value.trim().split(/\s+/).filter(Boolean).length;
+                      if (wordCount > 150) return `Maximum 150 words allowed (you have ${wordCount})`;
+                      return true;
                     },
                   })}
                   name="about"

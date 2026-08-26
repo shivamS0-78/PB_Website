@@ -14,6 +14,10 @@ export interface TempRecruitmentUser {
   email: string;
   otp: string;
   otpExpiresAt: Date;
+  isVerified: boolean;
+  verifiedAt: Date | null;
+  failedAttempts: number;
+  lockedUntil: Date | null;
 }
 
 export interface RecruitmentDoc extends Document, RecruitmentData {}
@@ -135,6 +139,22 @@ const tempRecruitmentUserSchema = new Schema<TempRecruitmentUserDoc>(
     otpExpiresAt: {
       type: Date,
       required: true,
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+    verifiedAt: {
+      type: Date,
+      default: null,
+    },
+    failedAttempts: {
+      type: Number,
+      default: 0,
+    },
+    lockedUntil: {
+      type: Date,
+      default: null,
     },
   },
   {
