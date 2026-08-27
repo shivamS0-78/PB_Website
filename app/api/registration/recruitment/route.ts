@@ -365,7 +365,9 @@ async function sendOTP(request: Request) {
       { status: 500 }
     );
   }
-}async function verifyOTP(request: Request) {
+}
+
+async function verifyOTP(request: Request) {
   try {
     await connectDB();
 
