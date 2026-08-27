@@ -101,6 +101,12 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const identifier = searchParams.get("identifier");
+    if (!identifier) {
+      return NextResponse.json(
+        { error: "identifier query parameter is required" },
+        { status: 400 }
+      );
+    }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (identifier && emailRegex.test(identifier)) {
@@ -161,7 +167,8 @@ export async function GET(request: Request) {
  * @swagger
  * /api/registration/recruitment:
  *   post:
- *     summary: Handle recruitment actions *     description: This endpoint handles different recruitment actions like adding a registration.
+ *     summary: Handle recruitment actions
+ *     description: This endpoint handles different recruitment actions like adding a registration.
  *     tags:
  *      - Recruitment
  *     parameters:
@@ -656,9 +663,9 @@ async function addRegistration(request: Request) {
     if (error instanceof Error) {
       // Handle Mongoose validation errors
       if (error.name === "ValidationError") {
-        const validationErrors = Object.values(error).map(
-          (err: unknown) => (err as { message: string }).message
-        );
+        const validationErrors = Object.values(
+          (error as unknown as { errors: Record<string, { message: string }> }).errors
+        ).map((err) => err.message);
         return NextResponse.json(
           {
             error: "Validation failed",

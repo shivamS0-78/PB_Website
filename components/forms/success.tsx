@@ -35,10 +35,11 @@ export default function Success(props: SuccessProps) {
           </p>
         </div>
         <div className="flex mx-auto items-center mt-6">
-          <a href={props.joinLink} className="w-full">
-            <button className="w-full px-6 py-3 bg-[#37ff00] hover:bg-[#2bcc00] text-white text-lg font-semibold rounded-full transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#37ff00] focus:ring-opacity-50">
-              Join WhatsApp Group!
-            </button>
+          <a
+            href={props.joinLink}
+            className="w-full px-6 py-3 bg-[#37ff00] hover:bg-[#2bcc00] text-white text-lg font-semibold rounded-full transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#37ff00] focus:ring-opacity-50 text-center"
+          >
+            Join WhatsApp Group!
           </a>
         </div>
       </div>
