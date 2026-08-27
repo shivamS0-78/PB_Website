@@ -1,4 +1,5 @@
 import mongoose, { Schema, Document } from "mongoose";
+import { branches, years } from "@/lib/constants/dropdownOptions";
 
 export interface RecruitmentData {
   name: string;
@@ -20,9 +21,9 @@ export interface TempRecruitmentUser {
   lockedUntil: Date | null;
 }
 
-export interface RecruitmentDoc extends Document, RecruitmentData {}
+export interface RecruitmentDoc extends Document, RecruitmentData { }
 
-export interface TempRecruitmentUserDoc extends Document, TempRecruitmentUser {}
+export interface TempRecruitmentUserDoc extends Document, TempRecruitmentUser { }
 
 const recruitmentSchema = new Schema<RecruitmentDoc>(
   {
@@ -58,33 +59,12 @@ const recruitmentSchema = new Schema<RecruitmentDoc>(
     year_of_study: {
       type: String,
       required: true,
-      enum: ["1st year", "2nd year", "3rd year", "4th year"],
+      enum: years,
     },
     branch: {
       type: String,
       required: true,
-      enum: [
-        "Artificial Intelligence and Machine Learning",
-        "Aeronautical Engineering",
-        "Automobile Engineering",
-        "Biotechnology",
-        "Computer Science and Engineering",
-        "Computer Science and Business Systems",
-        "Computer Science & Engineering (Cyber Security)",
-        "Computer Science & Engineering (Data Science)",
-        "Computer Science & Engineering (Internet of Things and Cyber Security Including Block Chain Technology)",
-        "Computer Science and Design",
-        "Chemical Engineering",
-        "Civil Engineering",
-        "Electrical & Electronics Engineering",
-        "Electronics & Communication Engineering",
-        "Electronics and Instrumentation Engineering",
-        "Electronics and Telecommunication Engineering",
-        "Information Science and Engineering",
-        "Mechanical Engineering",
-        "Medical Electronics Engineering",
-        "Robotics and Artificial Intelligence",
-      ],
+      enum: branches,
     },
     about: {
       type: String,
